@@ -1,0 +1,37 @@
+{# empty Twig template #}
+<script>
+    $(document).ready(function(){
+        function ajaxCall(usernme){
+            
+            $.ajax({ 
+                url:"{{ path('list_service')}}",
+                method:"post",
+                data: {id:username}
+            }).done(function(msg){
+   refreshList();         
+});
+        }
+    })
+    
+    
+   <script> $(document).ready(function(){
+function ajaxCall(username){ 
+    var list=$('#list');
+$.ajax({
+    url: "{{path('list_service')}}", 
+    method: "post",
+    data: {id: fk_id}).done(function(msg){ refreshList(); }); 
+} 
+function refreshList()(  
+        list.innerHTML = "";
+$.each(JSON.parse(msg['data']); function(i, item) {
+    var li = document.createElement('li'); 
+    var text = document.createTextNode( item.prenom + " " + item.nom );
+    li.appendChild(text);
+    list.appendChild(li); 
+    }); 
+    }
+});
+</script>
+
+<input type="text" id="list">

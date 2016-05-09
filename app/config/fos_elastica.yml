@@ -1,0 +1,25 @@
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    indexes:
+        obtao_blog:
+            client: default
+            types:
+                article:
+                    mappings:
+                        id:
+                            type: integer
+                        createdAt :
+                            type : date
+                        publishedAt :
+                            type : date
+                        published : 
+                            type : boolean
+                        title : ~
+                        content : ~
+                    persistence:
+                        driver: orm
+                        model: MyApp\UserBundle\Entity\User
+                        finder: ~
+                        provider: ~
+                        listener: ~

@@ -1,0 +1,41 @@
+ 
+fos_user_security_login:
+    defaults: { _controller: MyAppUserBundle:Security:login }
+    pattern: /user/login
+
+fos_user_security_check:
+    pattern: /user/login_check
+    defaults: { _controller: MyAppUserBundle:Security:check }
+
+fos_user_security_logout:
+    pattern: /user/logout
+    defaults: { _controller: MyAppUserBundle:Security:logout }
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /user
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /registration
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /account
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /account
+    
+    
+_security_check_facebook:
+    pattern:   /facebook/login_check
+    defaults:  { _controller: MyAppUserBundle:User:loginFb }
+
+_security_facebook_logout:
+  pattern:  /facebook/logout
+
+user_couple_fb_with_account:
+    pattern: /user/couple/facebook
+    defaults: { _controller: MyAppUserBundle:User:connectFacebookWithAccount }
+

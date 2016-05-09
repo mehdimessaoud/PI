@@ -1,0 +1,52 @@
+<form id="search">
+    <input type="text" id="query" name="query" value="{{ querystring }}">
+    <input type="submit" value="Ok">
+</form>
+<ul>
+    {% for fruit in fruits %}
+        <li>{{ fruit.name }}</li>
+    {% endfor %}
+</ul>
+ 
+<h3>Facettes:</h3>
+<ul>
+    {% for key, facet in facets %}
+        <li>
+            {{ key }}
+            <ul>
+                {% if facet.ranges is defined %}
+                    {% for range in facet.ranges %}
+                        <li>
+                        {% if range.from is defined and range.to is defined %}
+                            De {{ range.from }}
+                        {% elseif range.from is not defined and range.to is defined %}
+                            De 0 
+                        {% endif %}
+                        {% if range.to is defined %}
+                            à {{ range.to }}
+                        {% elseif range.to is not defined and range.from is defined %}
+                            A partir de {{ range.from }}
+                        {% endif %}
+                        ({{ range.count }})
+                        </li>
+                    {% endfor %}
+                {% endif %}
+                {% if facet.terms is defined %}
+                    {% for term in facet.terms %}
+                        <li>{{ term.term }} ({{ term.count }})</li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+ 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#search").submit(function(event) {
+            event.preventDefault();
+            window.location = '{{ app.request.getBaseURL() }}' + '/search/' + $('#query').val();
+        });
+    });
+</script>
